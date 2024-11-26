@@ -1,3 +1,5 @@
+![SmartFeed](https://github.com/user-attachments/assets/223e7297-5b82-436e-8e49-ac3b35a600ac)
+
 ## ❑ How to Clone
 
 1. クローン
