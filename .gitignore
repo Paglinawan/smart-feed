@@ -1,0 +1,9 @@
+.DS_Store
+.yarn
+bin
+dist/*.js
+node_modules
+src/config
+.clasp.json
+package-lock.json
+yarn.lock
