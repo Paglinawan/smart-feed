@@ -23,9 +23,9 @@
 
 ## ❑ Spreadsheet Sample
 
-| Date | Title     | URL    | Domain | Headline   | Like | Audio | Keep | Delete | Review | Tag    |
-| ---- | --------- | ------ | ------ | ---------- | ---- | ----- | ---- | ------ | ------ | ------ |
-| date | fn[title] | string | string | fn[domain] | bool | bool  | bool | bool   | number | select |
+| Date | Title  | URL    | Domain     | Headline     | Like | Audio | Keep | Delete | Review | Tag    |
+| ---- | ------ | ------ | ---------- | ------------ | ---- | ----- | ---- | ------ | ------ | ------ |
+| date | string | string | fn[domain] | fn[headline] | bool | bool  | bool | bool   | number | select |
 
-- fn[title] `=REGEXREPLACE($C2, "https?:\/\/(?:www\.)?(._?)\.._", "$1")`
-- fn[domain] `=HYPERLINK($C2, $B2)`
+- fn[domain] `=REGEXREPLACE($C2, "https?:\/\/(?:www\.)?(._?)\.._", "$1")`
+- fn[headline] `=HYPERLINK($C2, $B2)`
