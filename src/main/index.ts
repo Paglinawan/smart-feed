@@ -25,7 +25,7 @@ function doMorning() {
   removeRow(SHEET_PSYCHOLOGY);
 
   fetchAndWriteToSheet(JSON_WORLD_NEWS, SHEET_NEWS, true);
-  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, true);
+  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, false);
 
   fetchAndWriteToSheet(JSON_WORLD_DEVELOP, SHEET_DEVELOP, true);
   fetchAndWriteToSheet(JSON_JAPAN_DEVELOP, SHEET_DEVELOP, false);
@@ -41,7 +41,7 @@ function doNoon() {
   removeRow(SHEET_DESIGN);
   removeRow(SHEET_PSYCHOLOGY);
 
-  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, true);
+  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, false);
 }
 function doEvening() {
   removeRow(SHEET_NEWS);
@@ -50,7 +50,7 @@ function doEvening() {
   removeRow(SHEET_PSYCHOLOGY);
 
   fetchAndWriteToSheet(JSON_WORLD_NEWS, SHEET_NEWS, true);
-  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, true);
+  fetchAndWriteToSheet(JSON_JAPAN_NEWS, SHEET_NEWS, false);
 }
 function doWeekly() {
   fetchAndWriteToSheet(JSON_COLLEGE, SHEET_COLLEGE, true);
