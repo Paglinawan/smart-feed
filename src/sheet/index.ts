@@ -72,6 +72,18 @@ export const fetchAndWriteToSheet = (
       const domain = `=REGEXREPLACE($C${appendRow}, "https?:\\/\\/(?:www\\.)?(.*?)\\..*", "$1")`;
       const heading = `=HYPERLINK($C${appendRow}, $B${appendRow})`;
       sheet.appendRow([date, title, url, domain, heading]);
+      sheet
+        .getRange(appendRow, 1, 1, sheet.getLastColumn())
+        .setBorder(
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          "#cccccc",
+          SpreadsheetApp.BorderStyle.DASHED
+        );
     }
   }
 };
