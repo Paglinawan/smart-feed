@@ -1,4 +1,5 @@
 import { translateTitle } from "../deepl";
+import { appendRow } from "../utils/appendRow";
 
 export const doArchive = (sourceSheetName: string, targetSheetName: string) => {
   const sourceSheet =
@@ -51,11 +52,14 @@ export const fetchAndWriteToSheet = (
 ) => {
   const response = UrlFetchApp.fetch(jsonFeedUrl);
   const jsonData = JSON.parse(response.getContentText());
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-  if (sheet === null) return;
+  const activeSheet =
+    SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  if (activeSheet === null) return;
+  const lastRowIndex = activeSheet.getLastRow();
+  const lastColumnIndex = activeSheet.getLastColumn();
 
-  for (var i = 0; i < jsonData.items.length; i++) {
-    const appendRow = sheet.getLastRow() + 1;
+  for (let i = 0; i < jsonData.items.length; i++) {
+    const nextRowIndex = lastRowIndex + 1 + i;
     const item = jsonData.items[i];
     const datePublished = new Date(item.date_published);
     const msPerDay = 24 * 60 * 60 * 1000;
@@ -69,11 +73,18 @@ export const fetchAndWriteToSheet = (
       );
       const url = item.url;
       const title = isEn ? translateTitle(item.title) : item.title;
-      const domain = `=REGEXREPLACE($C${appendRow}, "https?:\\/\\/(?:www\\.)?(.*?)\\..*", "$1")`;
-      const heading = `=HYPERLINK($C${appendRow}, $B${appendRow})`;
-      sheet.appendRow([date, title, url, domain, heading]);
-      sheet
-        .getRange(appendRow, 1, 1, sheet.getLastColumn())
+      const domain = `=REGEXREPLACE($C${nextRowIndex}, "https?:\\/\\/(?:www\\.)?(.*?)\\..*", "$1")`;
+      const heading = `=HYPERLINK($C${nextRowIndex}, $B${nextRowIndex})`;
+      appendRow(activeSheet, nextRowIndex, lastColumnIndex, {
+        Date: date,
+        Title: title,
+        URL: url,
+        Domain: domain,
+        Headline: heading,
+      });
+
+      activeSheet
+        .getRange(nextRowIndex, 1, 1, lastColumnIndex)
         .setBorder(
           true,
           false,
